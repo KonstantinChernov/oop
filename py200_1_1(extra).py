@@ -1,5 +1,5 @@
-from py200_1_1 import Glass, GlassDefaultListArg, Node
-
+# from py200_1_1 import Glass, GlassDefaultListArg
+from Node import Node
 
 def main():
     glass1 = Glass(200, 100)
@@ -18,5 +18,17 @@ def main():
 
 
 if __name__  == '__main__':
-    main()
+
+
+    node = Node(1, Node(2), Node(3))
+    print(node)
+
+    node3 = Node(5)
+    print(node3)
+    node.next = node3
+    print(node3)
+    print(node)
+
+
+
 

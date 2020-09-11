@@ -158,27 +158,27 @@ class Node:
 
     @next.setter
     def next(self, next_):
-        self.__next = next_
-
-    def set_next(self, next_):
         if not isinstance(next_, Node):
             raise TypeError
         self.next = next_
 
-    def set_prev(self, prev):
-        self.prev = prev
+    @property
+    def prev(self):
+        return self.__prev
 
-    def id_(self):
-        return id(self)
-
-    def get_next(self):
-        return self.next
+    @prev.setter
+    def prev(self, prev):
+        if not isinstance(prev, Node):
+            raise TypeError
+        self.__prev = prev
 
     def __str__(self):
-        ...
+        # return f'{self}'
+        return f'({Node(self.value)})'
         
     def __repr__(self):
-        ...
+        # return f'{self}'
+        return f'({Node(self.value)})'
 
 class LinkedList:
 
