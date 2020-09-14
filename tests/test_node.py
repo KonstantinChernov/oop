@@ -1,7 +1,9 @@
 import unittest
 from Node import Node
 
+
 class TestNode(unittest.TestCase):
+
     def setUp(self) -> None:
         self.node = Node(1)
 
