@@ -1,11 +1,47 @@
 from Node import Node
-
+from driver import IStructureDriver
+from builder import DriverFactory
 
 class LinkedList:
-    def __init__(self):
+    def __init__(self, driver: IStructureDriver = None):
         self.__head = None
         self.__tail = None
         self.__len = 0
+        self.__driver = driver
+
+    @classmethod
+    def linked_list(cls, iterable):
+        linked_list = cls()
+        if isinstance(iterable, (list, tuple, set)):
+            for index, value in enumerate(iterable):
+                node = Node(value)
+                linked_list.append(node)
+            return linked_list
+        else:
+            raise TypeError('Argument should be an iterable object (but not dict)')
+
+    def add_driver(self, driver: IStructureDriver):
+        if isinstance(driver, IStructureDriver):
+            self.__driver = driver
+        else:
+            print('wrong type of driver. the adding failed')
+            self.__driver = None
+
+    def write(self):
+        if self.__driver:
+            self.__driver.write(self)
+        else:
+            print('no driver for writing')
+
+    @classmethod
+    def read(cls):
+        _format = input('enter the format of file')
+        driver = DriverFactory.get_driver(_format)
+        if driver:
+            new_iterable = driver.read()
+            return LinkedList.linked_list(new_iterable)
+        else:
+            print('no driver for reading')
 
     def __len__(self):
         return self.__len
@@ -123,16 +159,11 @@ class LinkedList:
             ind += 1
         self.__len -= 1
 
-    @classmethod
-    def linked_list(cls, iterable):
-        linked_list = cls()
-        if isinstance(iterable, (list, tuple, set)):
-            for index, value in enumerate(iterable):
-                node = Node(value)
-                linked_list.append(node)
-            return linked_list
-        else:
-            raise TypeError('Argument should be an iterable object (but not dict)')
+
+
+
+
+
 
 
 
@@ -145,3 +176,5 @@ class LinkedList:
 if __name__ == '__main__':
     l = LinkedList()
     print(len(l))
+    a = LinkedList.linked_list([1,2,3,4])
+    print(a)
