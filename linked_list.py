@@ -2,6 +2,7 @@ from Node import Node
 from driver import IStructureDriver
 from builder import DriverFactory
 
+
 class LinkedList:
     def __init__(self, driver: IStructureDriver = None):
         self.__head = None
@@ -53,7 +54,10 @@ class LinkedList:
             current_node = current_node.next
 
     def __str__(self):
-        return f'linked{list(self)}'
+        list_str = 'linked['
+        for node in self:
+            list_str += f'{node}' + ', '
+        return list_str[:-2] + ']'
 
     def insert(self, index, insert_node):
         if not isinstance(insert_node, Node):

@@ -37,9 +37,11 @@ class CSVFileDriver(IStructureDriver):
 
     def read(self):
         with open(self.__filename, 'r', encoding='utf8') as f:
-            file_reader = csv.reader(f, delimiter = ",")
-            file_reader = list(file_reader)
-            return file_reader
+            list_csv = []
+            file_reader = csv.reader(f, delimiter=",")
+            for i in file_reader:
+                list_csv += i
+            return list_csv
 
     def write(self, some_data=None):
         if not isinstance(some_data, list):
@@ -49,4 +51,3 @@ class CSVFileDriver(IStructureDriver):
         with open(self.__filename, "w", encoding='utf-8') as f:
             file_writer = csv.writer(f, delimiter=",", lineterminator="\r")
             file_writer.writerow(some_data)
-
